@@ -1,0 +1,16 @@
+h2 {
+    color: white;
+    text-align: center;
+}
+.box {
+	border: 2px dashed white;
+	height: 300px;
+	padding-top: 20px;
+}
+body {
+	background-color: black;
+}
+p {
+	color: white;
+	text-align: center;
+}

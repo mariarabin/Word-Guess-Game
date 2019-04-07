@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
+
+
+    <!-- Title displayed on tab. -->
+    <title>Word Guess Game</title>
+</head>
+<script>
+    // VARIABLES
+    // ==========================================================================
+
+    // The array of words.
+    var randomWordArr = ["madonna", "Journey", "Aerosmith"];
+
+    var randomWord = randomWordArr[Math.floor(Math.rabdom() * randomWordArr.length)];
+
+    var s;
+    var count = 0;
+
+    //to store the guesses
+    var answerArray = [];
+
+
+    // FUNCTIONS
+    // ==============================================================================
+
+    // fill up answer with array with under scores
+    function startUp() {
+        for (var i = 0; i < randomWord.length; i++) {
+            answerArray[i] = "_";
+        }
+        //put in string
+        s = answerArray.join(" ");
+        document.getElementById("answer").innerHTML = s;
+    }
+
+    function Letter() {
+        var letter = document.getElementById("letter").value;
+        if (; etter.length > 0)
+        {
+            for (var i = 0; i < randomWord.length; i++) {
+                if (randomWord[i] === letter) {
+                    answerArray[i] = letter;
+                }
+            }
+            count++;
+            document.getElementById("counter").innerHTML = 'Number of clicks: " + count;
+            document.getElementById("answer").innerHTML = answerArray.join(" ");
+        }
+        if (count > 5) {
+            document.getElementById("stat").innerHTML = "Come on";
+        }
+    }
+
+
+// MAIN PROCESS
+// ==============================================================================
+
+// Calling functions to start the game.
+
+
+</script>
+
+<body onload="startUp()">
+    <h1>Guess a letter</h1>
+    <input id="letter" type="text">
+    <input type="button" value="letter" onClick="Letter()" />
+    <p id="answer"></p>
+    <p id="counter"></p>
+    <p id="stat"></p>
+
+
+
+
+</body>
+
+</html>

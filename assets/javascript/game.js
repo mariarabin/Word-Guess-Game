@@ -3,8 +3,8 @@
 
 // The array of words.
 var randomWordArr = ["madonna", "Journey", "Aerosmith"];
-
 var randomWord = randomWordArr[Math.floor(Math.random() * randomWordArr.length)];
+
 console.log(randomWord);
 
 var wins = 0;
@@ -36,14 +36,33 @@ function startUp() {
 // ==============================================================================
 
 // Calling functions to start the game.
-document.onkeyup = function (event) {
-    var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-    var isAlpha = (/^[a-zA-Z]+$/).test(userGuess);
+//when user presses enter to start
+document.keypress = function (e) {
+    console.log("Enter is pressed");
+};
 
-    for (var i = 0; i < randomWord.length; i++) {
-        if (event.key === randomWord[i]) {
-            console.log(randomWord[i]);
-            dash[i] = randomWord[i];
+
+
+
+//when user presses a letter
+document.onkeydown = function (event) {
+    var userGuess = String.fromCharCode(event).toLowerCase();
+    var isAlpha = (/^[a-zA-Z]+$/).test(userGuess);
+    console.log(userGuess);
+
+    if (userGuess != isAlpha) {
+
+    };
+
+    if (userGuess === isAlpha) {
+        for (var i = 0; i < randomWord.length; i++) {
+            if (event.key === randomWord[i]) {
+                dash[i] = randomWord[i];
+                numGuesses--;
+                userGuess.push(letters);
+            }
         }
     }
+
+
 }

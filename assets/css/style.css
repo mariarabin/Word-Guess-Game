@@ -1,9 +1,9 @@
 h2 {
-    color: white;
+    color: pink;
     text-align: center;
 }
 .box {
-	border: 2px dashed white;
+	border: 2px dashed pink;
 	height: 300px;
 	padding-top: 20px;
 }
@@ -11,6 +11,19 @@ body {
 	background-color: black;
 }
 p {
-	color: white;
+	color: pink;
 	text-align: center;
+}
+
+.blinking{
+	animation:blinkingText 0.8s infinite;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: 50px;
+}
+@keyframes blinkingText{
+    0%{     color: gold;    }
+    49%{    color: transparent; }
+    50%{    color: transparent; }
+    99%{    color:transparent;  }
+    100%{   color: #000;    }
 }

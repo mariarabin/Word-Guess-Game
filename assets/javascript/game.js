@@ -8,6 +8,7 @@ console.log(randomWord);
 
 var wins = 0;
 var numGuesses = 10;
+var letters = [];
 
 //to store the guesses
 var userGuess = [];
@@ -21,7 +22,23 @@ for (var i = 0; i < randomWord.length; i++) {
     selectedWord = selectedWord + " _";
     dash.push(randomWord[i]);
 }
+//underscore has consumed
 document.getElementById("selectedwordid").innerHTML = selectedWord;
+
+//FUNCTION
+setInterval(blinktext, 500);
+var txt = "";
+var count = 0;
+function blinktext() {
+    var cntrl = document.getElementById("txtblinkingtext");
+    if (count == 0)
+        txt = cntrl.value;
+    if (count % 2 == 0)
+        cntrl.value = "";
+    else
+        cntrl.value = txt;
+    count++;
+}
 
 
 // MAIN PROCESS
@@ -33,13 +50,20 @@ document.onkeydown = function (event) {
     var indexWord = -1;
     var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
     var isAlpha = (/^[a-zA-Z]+$/).test(userGuess);
-    //console.log("isAlpha=====>" + isAlpha + "<=======");
+    console.log("isAlpha=====>" + isAlpha + "<=======");
 
-    //checks if alpha
+    //checks if 0 guesses then reveal final answer
     if (numGuesses === 0) {
         alert("End Game. Pls. refresh to play again.");
         document.getElementById("selectedwordid").innerHTML = randomWord;
         return;
+    }
+    //if inputted character is alpha then display as guesses letter
+    if (isAlpha) {
+        //alert("It is alpha");
+        //alert(userGuess + " is here");
+        letters.push(userGuess);
+        document.getElementById("typed").innerHTML = letters.join(', ');
     }
 
     //checks if pressed character is not alpha
@@ -56,7 +80,6 @@ document.onkeydown = function (event) {
                 indexWord = i;
                 correctGuess[i] = myWord;
                 console.log("=====>" + myWord + "<=======");
-                //correctGuess[i].push(myWord);
             }
         }
 

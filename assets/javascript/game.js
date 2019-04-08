@@ -58,6 +58,7 @@ document.onkeydown = function (event) {
         document.getElementById("selectedwordid").innerHTML = randomWord;
         return;
     }
+
     //if inputted character is alpha then display as guesses letter
     if (isAlpha) {
         //alert("It is alpha");
@@ -104,9 +105,8 @@ document.onkeydown = function (event) {
     console.log("correctGuess=====>" + correctGuess + "<=======");
     if (numGuesses > 0 && randomWord.length === correctGuess.length) {
         document.getElementById("scorewinid").innerHTML = 1;
+        document.getElementById("numguessesid").innerHTML = 0;
+        return;
     }
-
     document.getElementById("selectedwordid").innerHTML = selectedWord;
-
-
 }

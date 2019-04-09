@@ -5,27 +5,29 @@
 var randomWordArr = ["madonna", "queen", "prince", "eurythmics", "aerosmith", "journey", "blondie", "foreigner", "eagles", "genesis", "metallica", "inxs", "heart", "toto", "pretenders", "chicago", "sting", "scorpions", "abba", "whitesnake", "poison", "survivor", "yes", "bananarama", "rush"];
 var randomWord = randomWordArr[Math.floor(Math.random() * randomWordArr.length)];
 console.log(randomWord);
+//randomWord is the word to guess
 
+//declaring a variable
 var wins = 0;
 var numGuesses = 10;
-var letters = [];
+var letters = []; //characters that user has to input
 
 //to store the guesses
 var userGuess = [];
 
 //Display the selected word to guess but masked by "_"
-var dash = [];
-var correctGuess = [];
-var selectedWord = "";
+var dash = []; //underscore
+var correctGuess = []; //once all underscore are guessed
+var selectedWord = ""; //word with all underscores displayed
 var userWon = false;
 
-for (var i = 0; i < randomWord.length; i++) {
+for (var i = 0; i < randomWord.length; i++) { //counts the no. of characters in the randomWord
     selectedWord = selectedWord + " _";
     dash.push(randomWord[i]);
 }
 
 //underscore has consumed
-document.getElementById("selectedwordid").innerHTML = selectedWord;
+document.getElementById("selectedwordid").innerHTML = selectedWord; //displays all underscores
 
 //FUNCTION
 setInterval(blinktext, 500);
@@ -44,6 +46,7 @@ function blinktext() {
     }
 }
 
+//RESET Button
 function playAgain() {
     randomWord = randomWordArr[Math.floor(Math.random() * randomWordArr.length)];
     console.log(randomWord);

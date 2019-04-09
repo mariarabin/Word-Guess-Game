@@ -17,11 +17,13 @@ var userGuess = [];
 var dash = [];
 var correctGuess = [];
 var selectedWord = "";
+var userWon = false;
 
 for (var i = 0; i < randomWord.length; i++) {
     selectedWord = selectedWord + " _";
     dash.push(randomWord[i]);
 }
+
 //underscore has consumed
 document.getElementById("selectedwordid").innerHTML = selectedWord;
 
@@ -31,13 +33,37 @@ var txt = "";
 var count = 0;
 function blinktext() {
     var cntrl = document.getElementById("txtblinkingtext");
-    if (count == 0)
-        txt = cntrl.value;
-    if (count % 2 == 0)
-        cntrl.value = "";
-    else
-        cntrl.value = txt;
-    count++;
+    if (!!cntrl) {
+        if (count == 0)
+            txt = cntrl.value;
+        if (count % 2 == 0)
+            cntrl.value = "";
+        else
+            cntrl.value = txt;
+        count++;
+    }
+}
+
+function playAgain() {
+    randomWord = randomWordArr[Math.floor(Math.random() * randomWordArr.length)];
+    console.log(randomWord);
+    numGuesses = 10;
+    letters = [];
+    userGuess = [];
+    dash = [];
+    correctGuess = [];
+    selectedWord = "";
+    userWon = false;
+
+    for (var i = 0; i < randomWord.length; i++) {
+        selectedWord = selectedWord + " _";
+        dash.push(randomWord[i]);
+    }
+    //underscore has consumed
+    document.getElementById("selectedwordid").innerHTML = selectedWord;
+    document.getElementById("numguessesid").innerHTML = "" + 10;
+    document.getElementById("typed").innerHTML = 0;
+    document.getElementById("scorewinid").innerHTML = 0;
 }
 
 
@@ -50,11 +76,11 @@ document.onkeydown = function (event) {
     var indexWord = -1;
     var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
     var isAlpha = (/^[a-zA-Z]+$/).test(userGuess);
-    console.log("isAlpha=====>" + isAlpha + "<=======");
+    //console.log("isAlpha=====>" + isAlpha + "<=======");
 
     //checks if 0 guesses then reveal final answer
     if (numGuesses === 0) {
-        alert("End Game. Pls. refresh to play again.");
+        alert("End Game. Press 'RESET' to play again.");
         document.getElementById("selectedwordid").innerHTML = randomWord;
         return;
     }
@@ -80,11 +106,9 @@ document.onkeydown = function (event) {
                 myWord = userGuess;
                 indexWord = i;
                 correctGuess[i] = myWord;
-                console.log("=====>" + myWord + "<=======");
+                //console.log("=====>" + myWord + "<=======");
             }
         }
-
-
         //if pressed character does not match - it subtracts from the numGuesses
     } else {
         numGuesses--;
@@ -101,12 +125,27 @@ document.onkeydown = function (event) {
             selectedWord = selectedWord + " _";
         }
     }
-    //if all characters are guessed correctly while numGuesses is not 0 then win =1
-    console.log("correctGuess=====>" + correctGuess + "<=======");
-    if (numGuesses > 0 && randomWord.length === correctGuess.length) {
-        document.getElementById("scorewinid").innerHTML = 1;
-        document.getElementById("numguessesid").innerHTML = 0;
-        return;
+
+    document.getElementById("selectedwordid").innerHTML = selectedWord;
+
+    var guessDisplayString = document.getElementById("selectedwordid").innerHTML;
+
+    if (correctGuess !== undefined && correctGuess.length > 0) {
+        if (numGuesses >= 0 && randomWord.length === correctGuess.length) {
+
+            for (var i = 0; i < randomWord.length; i++) {
+                if (correctGuess[i] !== undefined && correctGuess[i] === guessDisplayString[i] && randomWord[i] === guessDisplayString[i]) {
+                    if (i === (randomWord.length - 1)) {
+                        userWon = true;
+                    }
+                }
+            }
+            if (userWon) {
+                document.getElementById("scorewinid").innerHTML = 1;
+                document.getElementById("numguessesid").innerHTML = numGuesses;
+            }
+        }
     }
+
     document.getElementById("selectedwordid").innerHTML = selectedWord;
 }
